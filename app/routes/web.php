@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix'=>'auth'], function (){
+   Route::get('/login', 'App\Http\Controllers\Auth\LoginController@index')->name('login');
+   Route::post('/login', 'App\Http\Controllers\Auth\LoginController@store')->name('login.store');
+   Route::get('/register', 'App\Http\Controllers\Auth\RegistrationController@index')->name('register');
+   Route::post('/register', 'App\Http\Controllers\Auth\RegistrationController@store')->name('register.store');
+
+
+    Route::group(['middleware' => 'check.auth'], function (){
+        Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+        Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+    });
+});
+
