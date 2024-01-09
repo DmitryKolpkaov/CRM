@@ -38,4 +38,15 @@ Route::group(['middleware' => 'check.auth'], function (){
         Route::put('your/task/update/{task}', 'App\Http\Controllers\Tasks\TaskController@update')->name('user.tasks.update');
         Route::delete('your/task/destroy{task}', 'App\Http\Controllers\Tasks\TaskController@destroy')->name('user.tasks.destroy');
     });
+
+    Route::group(['middleware'=>'isManager'], function (){
+       Route::group(['prefix'=>'teams'], function (){
+           Route::get('your/teams', 'App\Http\Controllers\Teams\TeamsController@index')->name('teams');
+           Route::get('your/team/create', 'App\Http\Controllers\Teams\TeamsController@create')->name('teams.create');
+           Route::post('your/team/store', 'App\Http\Controllers\Teams\TeamsController@store')->name('teams.store');
+           Route::get('your/team/{team}', 'App\Http\Controllers\Teams\TeamsController@show')->name('team.show');
+           Route::post('your/team/{team}/invite', 'App\Http\Controllers\Teams\TeamsController@invite')->name('team.invite');
+           Route::post('team/{team}/assign-task', 'App\Http\Controllers\Teams\TeamsController@assignTask')->name('team.user.assignTask');
+       });
+    });
 });

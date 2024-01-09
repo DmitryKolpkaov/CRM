@@ -22,7 +22,11 @@
                 <label for="comment">Comment</label>
                 <textarea class="form-control" id="comment" name="comment">{{ $task->comment }}</textarea>
             </div>
+            <br>
             <button type="submit" class="btn btn-primary">Update</button>
+            <br>
+            <br>
+            <a href="{{ route('user.tasks', $task->id) }}" class="btn btn-primary">Вернуться назад</a>
         </form>
     </div>
 @endsection

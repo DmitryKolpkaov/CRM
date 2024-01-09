@@ -55,4 +55,9 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_user');
+    }
 }

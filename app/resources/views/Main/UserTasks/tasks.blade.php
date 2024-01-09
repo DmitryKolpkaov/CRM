@@ -22,7 +22,12 @@
                         <p class="card-text">{{ $task->description }}</p>
                         <p class="card-text">Deadline: {{ $task->deadline }}</p>
                         <p class="card-text">Comment: {{ $task->comment }}</p>
-                        <a href="{{ route('user.tasks.edit', $task->id) }}" class="btn btn-primary">Редактировать</a>
+                        @if ($task->team)
+                            <p>Установленно командой: {{ $task->team->name }}</p>
+                        @endif
+                        @if (!$task->team_id || auth()->id() === $task->created_by)
+                            <a href="{{ route('user.tasks.edit', $task->id) }}" class="btn btn-primary">Редактировать</a>
+                        @endif
                         <form method="POST" action="{{ route('user.tasks.destroy', $task->id) }}">
                             @csrf
                             @method('DELETE')
