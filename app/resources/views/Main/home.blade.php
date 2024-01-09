@@ -5,6 +5,7 @@
        <h1>Home Page!</h1>
         <br>
         <hr>
-        <button><a href="{{route('logout')}}">Выйти</a></button>
+        <a class="btn btn-primary" href="{{route('user.tasks')}}">Задачи</a>
+        <a class="btn btn-danger" href="{{route('logout')}}">Выйти</a>
     </div>
 @endsection

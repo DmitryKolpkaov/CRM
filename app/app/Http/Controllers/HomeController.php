@@ -10,4 +10,9 @@ class HomeController extends Controller
     {
         return view('Main.home');
     }
+
+    public function userTasksPage(){
+        $tasks = Task::where('user_id', auth()->id())->get();
+        return view('Main.UserTasks.tasks', compact('tasks'));
+    }
 }
